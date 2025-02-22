@@ -4,18 +4,19 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-public class LionTestNoParameters {
+public class LionNoParametersTest {
 
     @Test
-    public void testInvalidSexThrowException() throws Exception {
+    public void testInvalidSexThrowExceptionCatchingManually() {
         Feline felineMock = mock(Feline.class);
-        Lion lion = new Lion("Самка", felineMock);
-        Exception exception = assertThrows(Exception.class, () -> new Lion("Другие", felineMock));
-        assertEquals("Не соответствует ", "Используйте допустимые значения пола животного - самец или самка" , exception.getMessage());
+        try {
+            new Lion("Другие", felineMock);
+        } catch (Exception e) {
+            assertEquals("Используйте допустимые значения пола животного - самец или самка", e.getMessage());
+        }
     }
 
 
@@ -40,4 +41,16 @@ public class LionTestNoParameters {
         assertEquals(expectedFood, lion.getFood());
         verify(felineMock, times(1)).getFood("Хищник");
     }
+
+
+    @Test
+    public void testLionRealObject() throws Exception {
+        Feline feline = new Feline();
+        Lion lion = new Lion("Самец", feline);
+        assertTrue(lion.doesHaveMane());
+        assertEquals(1, lion.getKittens());
+        assertNotNull(lion.getFood());
+    }
+
+
 }

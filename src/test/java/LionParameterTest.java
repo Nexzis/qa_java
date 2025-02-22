@@ -8,12 +8,12 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(Parameterized.class)
-public class LionTestWithParameters {
+public class LionParameterTest {
 
     private final String sex;
     private final boolean expectedHasMane;
 
-    public LionTestWithParameters(String sex, boolean expectedHasMane) {
+    public LionParameterTest(String sex, boolean expectedHasMane) {
         this.sex = sex;
         this.expectedHasMane = expectedHasMane;
     }
